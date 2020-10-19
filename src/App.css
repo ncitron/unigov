@@ -6,6 +6,8 @@
     font-size: 22px;
     border-top: 1px solid #d4d4d4;
     padding: 20px;
+    margin: 0px;
+    word-wrap: break-word;
 }
 
 .header {
@@ -45,6 +47,16 @@
     margin-left: auto;
     margin-right: auto;
     padding: 0px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #db2cc4;
+    border-color: #db2cc4;
+    float: right;
+}
+
+.delegate-button-container {
+    padding-right: 0px;
 }
 
 .delegate-title {
