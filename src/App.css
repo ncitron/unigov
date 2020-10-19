@@ -4,11 +4,32 @@
 
 .Delegate {
     font-size: 22px;
+    border-top: 1px solid #d4d4d4;
+    padding: 20px;
 }
 
 .header {
     color: white;
     background-color: black;
+    padding-top: 20px;
+}
+
+.name-page {
+    margin-left: 20px;
+}
+
+.nav {
+    justify-content: center;
+}
+
+.delegate-nav {
+    margin-right: 20px;
+    color: #db2cc4;
+    text-decoration: underline;
+}
+
+.ap-nav {
+    margin-left: 20px;
 }
 
 .hero {
@@ -20,6 +41,15 @@
     margin-top: -7vh;
     background-color: white;
     border-radius: 5px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+}
+
+.delegate-title {
+    padding: 20px;
+    font-size: 30px;
 }
 
 body {

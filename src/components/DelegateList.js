@@ -32,7 +32,7 @@ class DelegateList extends React.Component {
                     <div class="col-3" />
                     <div class="col-6 delegate-list">
                         {loader}
-
+                        <div class="delegate-title">Delegates</div>
                         {this.state.delegates.map(delegate => (
                             <Delegate delegate={delegate} />
                         ))}
