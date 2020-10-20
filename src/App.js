@@ -16,8 +16,9 @@ class App extends React.Component {
         let uni = new web3.eth.Contract(uniABI, uniAddress);
 
         let delegations = []
-        for(let i = 10_500_000; i < await web3.eth.getBlockNumber(); i+=100_000) {
+        for(let i = 10_750_000; i < await web3.eth.getBlockNumber()+100_000; i+=100_000) {
             console.log('working');
+            console.log(i);
             delegations.push(...await uni.getPastEvents('DelegateVotesChanged', {
                 fromBlock: (i-100_000),
                 toBlock: i
@@ -36,20 +37,9 @@ class App extends React.Component {
             if (voteWeight === 0) return;
             delegates.push({
             delegate: account,
-            votes: voteWeight
+            votes: voteWeight / 1e18
             });
         });
-
-        delegates = delegates.sort((a, b) => {
-            return a.votes < b.votes ? 1 : -1;
-        });
-
-        delegates = delegates.slice(0, 50);
-
-        for(let i = 0; i < delegates.length; i++) {
-            delegates[i].votes = parseInt(await uni.methods.getCurrentVotes(delegates[i].delegate).call() / 1e18);
-            console.log('sorting');
-        }
 
         delegates = delegates.sort((a, b) => {
             return a.votes < b.votes ? 1 : -1;

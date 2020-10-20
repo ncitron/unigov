@@ -41,7 +41,7 @@ class Delegate extends React.Component {
                 <div class="col-9">
                     {this.props.delegate.name !== null ? this.props.delegate.name : this.props.delegate.delegate}
                     <br />
-                    votes: {this.props.delegate.votes} UNI
+                    votes: {this.props.delegate.votes.toFixed(0)} UNI
                 </div>
                 <div class="col-3 delegate-button-container">
                     <button type="button" class="btn btn-primary" onClick={this.delegateTo}>Delegate</button>
