@@ -16,7 +16,7 @@ class App extends React.Component {
         let uni = new web3.eth.Contract(uniABI, uniAddress);
 
         let delegations = []
-        for(let i = 10_750_000; i < await web3.eth.getBlockNumber(); i+=100_000) {
+        for(let i = 10_500_000; i < await web3.eth.getBlockNumber(); i+=100_000) {
             console.log('working');
             delegations.push(...await uni.getPastEvents('DelegateVotesChanged', {
                 fromBlock: (i-100_000),
