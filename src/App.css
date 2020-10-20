@@ -1,5 +1,13 @@
-.sweet-loading {
-    margin-top: 20vh;
+.spinner {
+    justify-content: center;
+    margin-top: 15vh;
+    margin-bottom: 15vh;
+}
+
+.spinner-border {
+    color: #db2cc4;
+    width: 5vh;
+    height: 5vh;
 }
 
 .Delegate {
@@ -10,28 +18,46 @@
     word-wrap: break-word;
 }
 
+.Delegate:hover {
+    border-left: 3px solid #db2cc4;
+}
+
 .header {
     color: white;
     background-color: black;
     padding-top: 20px;
+    margin: 0px;
 }
 
 .name-page {
-    margin-left: 20px;
+    padding-left: 30px;
+    font-size: 20px;
 }
 
 .nav {
     justify-content: center;
+    padding: 0px;
+    font-size: 20px;
 }
 
 .delegate-nav {
-    margin-right: 20px;
+    margin-left: 20px;
+    color: white;
+}
+
+.delegate-nav:hover {
     color: #db2cc4;
-    text-decoration: underline;
+    border-bottom: 2px solid #db2cc4;
 }
 
 .ap-nav {
-    margin-left: 20px;
+    color: white;
+    margin-right: 20px;
+}
+
+.ap-nav:hover {
+    color: #db2cc4;
+    border-bottom: 2px solid #db2cc4;
 }
 
 .hero {
