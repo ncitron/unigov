@@ -8,7 +8,8 @@ class Delegate extends React.Component {
 
     state = {
         uni: {},
-        account: ''
+        account: '',
+        votes: ''
     }
 
     async componentDidMount() {
@@ -19,11 +20,11 @@ class Delegate extends React.Component {
 
         //format votes
         if(this.props.delegate.votes >= 1_000_000) {
-            this.props.delegate.votes = (this.props.delegate.votes / 1_000_000).toFixed(2) + 'M';
+            this.setState({ votes: (this.props.delegate.votes / 1_000_000).toFixed(2) + 'M' });
         } else if(this.props.delegate.votes >= 1_000) {
-            this.props.delegate.votes = (this.props.delegate.votes / 1_000).toFixed(2) + 'K';
+            this.setState({ votes: (this.props.delegate.votes / 1_000).toFixed(2) + 'K' });
         } else {
-            this.props.delegate.votes = this.props.delegate.votes.toFixed(0);
+            this.setState({ votes: (this.props.delegate.votes).toFixed(0) });
         }
 
         //check if address has an ens name
@@ -50,7 +51,7 @@ class Delegate extends React.Component {
                 <div class="col-9">
                     {this.props.delegate.name !== null ? this.props.delegate.name : this.props.delegate.delegate}
                     <br />
-                    votes: {this.props.delegate.votes} UNI
+                    votes: {this.state.votes} UNI
                 </div>
                 <div class="col-3 delegate-button-container">
                     <button type="button" class="btn btn-primary" onClick={this.delegateTo}>Delegate</button>
