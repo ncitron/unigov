@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
 import './App.css';
 import Web3 from 'web3'
 import { abi as uniABI } from './abi/uni.json';
@@ -71,6 +71,9 @@ class App extends React.Component {
                     </div>
                     <div class="hero" />
                     <Switch>
+                        <Route exact path='/'>
+                            <Redirect to="/del"></Redirect>
+                        </Route>
                         <Route path='/del'>
                             <DelegateList delegates={this.state.delegates} />
                         </Route>
