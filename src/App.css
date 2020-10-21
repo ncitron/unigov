@@ -12,7 +12,7 @@
 
 .Delegate {
     font-size: 22px;
-    border-top: 1px solid #d4d4d4;
+    border-bottom: 1px solid #d4d4d4;
     padding: 20px;
     margin: 0px;
     word-wrap: break-word;
@@ -69,16 +69,35 @@
     margin-top: -7vh;
     background-color: white;
     border-radius: 5px;
-    height: 100%;
+    min-height: 70vh;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+}
+
+.ap-list {
+    margin-top: -7vh;
+    background-color: white;
+    border-radius: 5px;
+    height: 70vh;
     margin-left: auto;
     margin-right: auto;
     padding: 0px;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: #db2cc4;
-    border-color: #db2cc4;
+    background-color: #db2cc4 !important;
+    border-color: #db2cc4 !important;
     float: right;
+}
+
+.btn-lg {
+    font-size: 2rem;
+    width: 40%;
+    margin-right: 30%;
+    border-radius: 50px;
+    height: 20%;
+    margin-bottom: 40%;
 }
 
 .delegate-button-container {
@@ -88,8 +107,10 @@
 .delegate-title {
     padding: 35px;
     font-size: 30px;
+    border-bottom: 1px solid #d4d4d4;;
 }
 
 body {
     background-color: #f2f2f2;
+    font-family: 'Roboto', sans-serif;
 }
