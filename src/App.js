@@ -9,13 +9,14 @@ import Portis from "@portis/web3";
 import { abi as uniABI } from './abi/uni.json';
 import DelegateList from './components/DelegateList';
 import AutonomousProposalList from './components/AutonomousProposalList';
-
+import CodecksInfo from './components/CodecksInfo';
+import AboutUs from './components/AboutUs.js';
 class App extends React.Component {
     state = {
         delegates: [],
         web3: {}
     }
-    
+
     getDelegates = async () => {
         if(Object.keys(this.state.web3).length !== 0) {
             const uniAddress = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984';
@@ -79,7 +80,7 @@ class App extends React.Component {
                 }
             }
         };
-          
+
         const web3Modal = new Web3Modal({
             network: "mainnet",
             cacheProvider: false,
@@ -112,10 +113,20 @@ class App extends React.Component {
                             <NavLink to='/ap' className="ap-nav" style={{ textDecoration: 'none'}} activeStyle = {{ color: '#db2cc4', borderBottom: '2px solid #db2cc4'}}>
                                     Autonomous Proposals
                             </NavLink>
-                            <NavLink to='/del' className="delegate-nav" 
-                            style={{ textDecoration: 'none'}} 
+                            <NavLink to='/del' className="delegate-nav"
+                            style={{ textDecoration: 'none'}}
                             activeStyle = {{ color: '#db2cc4', borderBottom: '2px solid #db2cc4'}}>
                                     Delegates
+                            </NavLink>
+                            <NavLink to='/co' className="codecks-nav"
+                            style={{ textDecoration: 'none'}}
+                            activeStyle = {{ color: '#db2cc4', borderBottom: '2px solid #db2cc4'}}>
+                                    Codecks
+                            </NavLink>
+                            <NavLink to='/aboutUs' className="aboutus-nav"
+                            style={{ textDecoration: 'none'}}
+                            activeStyle = {{ color: '#db2cc4', borderBottom: '2px solid #db2cc4'}}>
+                                    About Us
                             </NavLink>
                         </div>
                         <div class="col-4">
@@ -132,6 +143,12 @@ class App extends React.Component {
                         </Route>
                         <Route path='/ap'>
                             <AutonomousProposalList></AutonomousProposalList>
+                        </Route>
+                        <Route path='/co'>
+                            <CodecksInfo></CodecksInfo>
+                        </Route>
+                        <Route path='/aboutUs'>
+                            <AboutUs></AboutUs>
                         </Route>
                     </Switch>
                 </Router>
