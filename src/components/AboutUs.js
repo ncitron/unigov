@@ -11,7 +11,7 @@ render() {
     return (
         <div class="row">
             <div class="col-3"></div>
-            <div class="col-6">
+            <div class="col-6" style={{ padding: '0px'}}>
                 <div class="aboutus content-container">
                     <div class="aboutus-title">
                         About Us
