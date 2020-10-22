@@ -27,7 +27,7 @@ render() {
                         <p>We at Penguin Party were looking for ways to let the community give us feedback and contribute to our mission! So, in that aim, we have integrated codecks to help us start our mission to gamify participation!</p>
                         <p><a href="https://open.codecks.io/-penguinparty">https://open.codecks.io/-penguinparty</a></p>
                         <p>Now you can see exactly what we’re working on and why, who’s working on it, and as we develop our cards/decks/journeys. Now you can see what it all means! We are now totally transparent. The community can suggest ideas to the codecks by voting it in on our discord with the command: !idea [idea] in #general. : )</p>
-                        <p>Come plan the future of decentralized governance with us, at Penguin Party!
+                        <p>Come plan the future of decentralized governance with us, at Penguin Party!&nbsp;
                         <a href="https://discord.gg/mSFmsB">https://discord.gg/mSFmsB</a></p>
                         <p><img src="https://cdn-images-1.medium.com/max/2000/1*HUCFYJcUUkND6jedFIOtPA.gif" alt=""></img></p>
                         <p>Signed,
