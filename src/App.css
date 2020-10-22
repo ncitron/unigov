@@ -9,20 +9,39 @@
     width: 5vh;
     height: 5vh;
 }
+
 .aboutus-nav{
   margin-right:20px;
   margin-left: 20px;
   color: white;
 }
-.aboutus{
-  text-align:center;
+
+.aboutus-nav:hover {
+    color: #db2cc4;
+    border-bottom: 2px solid #db2cc4;
+}
+
+.aboutus {
   display:block;
 }
-.codecks-nav{
+
+.aboutus img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.codecks-nav {
   margin-right:20px;
   margin-left: 20px;
   color: white;
 }
+
+.codecks-nav:hover {
+    color: #db2cc4;
+    border-bottom: 2px solid #db2cc4;
+}
+
 .Delegate {
     font-size: 22px;
     border-bottom: 1px solid #d4d4d4;
@@ -55,6 +74,7 @@
 
 .delegate-nav {
     margin-left: 20px;
+    margin-right: 20px;
     color: white;
 }
 
@@ -78,7 +98,7 @@
     background-color: black;
 }
 
-.delegate-list {
+.delegate-list, .content-container {
     margin-top: -7vh;
     background-color: white;
     border-radius: 5px;
@@ -117,7 +137,7 @@
     padding-right: 0px;
 }
 
-.delegate-title {
+.delegate-title, .aboutus-title {
     padding: 35px;
     font-size: 30px;
     border-bottom: 1px solid #d4d4d4;;
