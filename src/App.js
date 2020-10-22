@@ -24,7 +24,7 @@ class App extends React.Component {
 
             let delegations = []
             for(let i = 10_750_000; i < await this.state.web3.eth.getBlockNumber()+100_000; i+=100_000) {
-                console.log('working');
+                console.log('indexing delegates');
                 console.log(i);
                 delegations.push(...await uni.getPastEvents('DelegateVotesChanged', {
                     fromBlock: (i-100_000),
@@ -108,8 +108,8 @@ class App extends React.Component {
             <div className="App">
                 <Router>
                     <div class="row header">
-                        <div class="col-4 name-page">Uniswap Governance</div>
-                        <div class="col-4 nav">
+                        <div class="col-2 name-page">Uniswap Governance</div>
+                        <div class="col-8 nav">
                             <NavLink to='/ap' className="ap-nav" style={{ textDecoration: 'none'}} activeStyle = {{ color: '#db2cc4', borderBottom: '2px solid #db2cc4'}}>
                                     Autonomous Proposals
                             </NavLink>
@@ -129,7 +129,7 @@ class App extends React.Component {
                                     About Us
                             </NavLink>
                         </div>
-                        <div class="col-4">
+                        <div class="col-2">
                             <this.ConnectButton></this.ConnectButton>
                         </div>
                     </div>
@@ -142,7 +142,7 @@ class App extends React.Component {
                             <DelegateList delegates={this.state.delegates} web3={this.state.web3} connect={this.connect} />
                         </Route>
                         <Route path='/ap'>
-                            <AutonomousProposalList></AutonomousProposalList>
+                            <AutonomousProposalList web3={this.state.web3} connect={this.connect}></AutonomousProposalList>
                         </Route>
                         <Route path='/co'>
                             <CodecksInfo></CodecksInfo>
