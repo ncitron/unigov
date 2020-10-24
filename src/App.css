@@ -42,6 +42,17 @@
     border-bottom: 2px solid #db2cc4;
 }
 
+.AutonomousProposal {
+    font-size: 22px;
+    border-bottom: 1px solid #d4d4d4;
+    padding: 35px;
+    word-wrap: break-word;
+}
+
+.AutonomousProposal:hover {
+    border-left: 3px solid #db2cc4;
+}
+
 .Delegate {
     font-size: 22px;
     border-bottom: 1px solid #d4d4d4;
@@ -153,4 +164,13 @@ iframe {
 body {
     background-color: #f2f2f2;
     font-family: 'Roboto', sans-serif;
+}
+
+.progress {
+    margin-left: 15px;
+    width: 400px;
+}
+
+.progress-bar {
+    background-color: #db2cc4;
 }

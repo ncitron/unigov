@@ -7,23 +7,30 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import MewConnect from "@myetherwallet/mewconnect-web-client";
 import Portis from "@portis/web3";
 import { abi as uniABI } from './abi/uni.json';
+import apFactoryABI from './abi/apFactory.json';
 import DelegateList from './components/DelegateList';
 import AutonomousProposalList from './components/AutonomousProposalList';
 import CodecksInfo from './components/CodecksInfo';
 import AboutUs from './components/AboutUs.js';
+require('dotenv').config();
+
 class App extends React.Component {
     state = {
         delegates: [],
+        autoProps: [],
         web3: {}
     }
 
     getDelegates = async () => {
+        console.log(1)
         if(Object.keys(this.state.web3).length !== 0) {
-            const uniAddress = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984';
+            const uniAddress = process.env.REACT_APP_UNI_ADDRESS;
             let uni = new this.state.web3.eth.Contract(uniABI, uniAddress);
 
-            let delegations = []
-            for(let i = 10_750_000; i < await this.state.web3.eth.getBlockNumber()+100_000; i+=100_000) {
+            let delegations = [];
+            let startingBlock = 10_750_000;
+            if(process.env.REACT_APP_NETWORK === 'goerli') startingBlock = 100_000;
+            for(let i = startingBlock; i < await this.state.web3.eth.getBlockNumber()+100_000; i+=100_000) {
                 console.log('indexing delegates');
                 console.log(i);
                 delegations.push(...await uni.getPastEvents('DelegateVotesChanged', {
@@ -58,25 +65,36 @@ class App extends React.Component {
         }
     }
 
+    getAutonomousProps = async () => {
+        const apFactoryAddress = process.env.REACT_APP_AP_FACTORY_ADDRESS;
+        console.log(apFactoryAddress);
+        let apFactory = new this.state.web3.eth.Contract(apFactoryABI, apFactoryAddress);
+        let autoProps = await apFactory.getPastEvents('CrowdProposalCreated', {
+            fromBlock: 0,
+            toBlock: await this.state.web3.eth.getBlockNumber()
+        });
+        this.setState({ autoProps: autoProps });
+    }
+
     connect = async () => {
         console.log("connecting...");
         const providerOptions = {
             walletconnect: {
                 package: WalletConnectProvider,
                 options: {
-                    infuraId: "b6c1c2a638ef45098692c3557068e65d"
+                    infuraId: process.env.REACT_APP_INFURA_KEY
                 }
             },
             mewconnect: {
                 package: MewConnect,
                 options: {
-                    infuraId: "b6c1c2a638ef45098692c3557068e65d"
+                    infuraId: process.env.REACT_APP_INFURA_KEY
                 }
             },
             portis: {
-                package: Portis, // required
+                package: Portis,
                 options: {
-                    id: "eb9c9783-2069-46a5-b587-6fa0d54c59af" // required
+                    id: process.env.REACT_APP_PORTIS_KEY
                 }
             }
         };
@@ -92,6 +110,7 @@ class App extends React.Component {
         const provider = await web3Modal.connect();
         this.setState({web3: new Web3(provider)});
 
+        await this.getAutonomousProps();
         await this.getDelegates();
     }
 
@@ -142,7 +161,7 @@ class App extends React.Component {
                             <DelegateList delegates={this.state.delegates} web3={this.state.web3} connect={this.connect} />
                         </Route>
                         <Route path='/ap'>
-                            <AutonomousProposalList web3={this.state.web3} connect={this.connect}></AutonomousProposalList>
+                            <AutonomousProposalList autoProps={this.state.autoProps} web3={this.state.web3} connect={this.connect}></AutonomousProposalList>
                         </Route>
                         <Route path='/co'>
                             <CodecksInfo></CodecksInfo>

@@ -1,4 +1,5 @@
 import React from 'react';
+import AutonomousProposal from './AutonomousProposal';
 
 class AutonomousProposalList extends React.Component {
     render() {
@@ -12,7 +13,7 @@ class AutonomousProposalList extends React.Component {
         }
 
         let noProps;
-        if(loaderOrConnect == null) {
+        if(loaderOrConnect == null && this.props.autoProps.length === 0) {
             noProps = 
             <div style={{ textAlign: 'center', marginTop: '25%', fontSize: '30px', color: 'grey'}}>
                 None Found.
@@ -27,6 +28,9 @@ class AutonomousProposalList extends React.Component {
                         <div class="delegate-title">Autonomous Proposals</div>
                         {loaderOrConnect}
                         {noProps}
+                        {this.props.autoProps.map(autoProp => (
+                            <AutonomousProposal autoProp={autoProp} web3={this.props.web3} />
+                        ))}
                     </div>
                     <div class="col-3" />
                 </div>

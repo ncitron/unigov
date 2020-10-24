@@ -41,9 +41,7 @@ class Delegate extends React.Component {
     }
 
     delegateTo = async () => {
-        console.log('delegating')
-        console.log(this.state.account);
-        await this.state.uni.methods.delegate(this.props.delegate.delegate).send({ from: this.state.account })
+        await this.state.uni.methods.delegate(this.props.delegate.delegate).send({ from: this.state.account });
     }
 
     render() {
