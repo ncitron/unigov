@@ -13,7 +13,7 @@ class AutonomousProposal extends React.Component {
         if(Object.keys(this.props.autoProp) !== 0) {
             let title =  this.props.autoProp.returnValues.description.split(/\r?\n/)[0];
             title = title.replace('# ', '')
-            if(title.length > 80) return title.slice(0, 80);
+            if(title.length > 100) return title.slice(0, 100) + '...';
             return title;
         }
         return ''
