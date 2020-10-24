@@ -155,7 +155,7 @@ class App extends React.Component {
                     <div class="hero" />
                     <Switch>
                         <Route exact path='/'>
-                            <Redirect to="/del"></Redirect>
+                            <Redirect to="/ap"></Redirect>
                         </Route>
                         <Route path='/del'>
                             <DelegateList delegates={this.state.delegates} web3={this.state.web3} connect={this.connect} />
