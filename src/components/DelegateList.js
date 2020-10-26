@@ -26,14 +26,12 @@ class DelegateList extends React.Component {
 
         return (
             <div>
-                <div className="row">
-                    <div className="col-10 delegate-list">
-                        <div className="delegate-title">Delegates</div>
-                        {loaderOrConnect}
-                        {this.props.delegates.map(delegate => (
-                            <Delegate delegate={delegate} web3={this.props.web3} />
-                        ))}
-                    </div>
+                <div className="col-10 delegate-list">
+                    <div className="delegate-title">Delegates</div>
+                    {loaderOrConnect}
+                    {this.props.delegates.map(delegate => (
+                        <Delegate delegate={delegate} web3={this.props.web3} />
+                    ))}
                 </div>
             </div>
         );
