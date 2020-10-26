@@ -22,15 +22,13 @@ class AutonomousProposalList extends React.Component {
 
         return (
             <div>
-                <div className="row">
-                    <div className="col-10 ap-list">
-                        <div className="delegate-title">Autonomous Proposals</div>
-                        {loaderOrConnect}
-                        {noProps}
-                        {this.props.autoProps.map(autoProp => (
-                            <AutonomousProposal autoProp={autoProp} web3={this.props.web3} />
-                        ))}
-                    </div>
+                <div className="col-10 ap-list">
+                    <div className="delegate-title">Autonomous Proposals</div>
+                    {loaderOrConnect}
+                    {noProps}
+                    {this.props.autoProps.map(autoProp => (
+                        <AutonomousProposal autoProp={autoProp} web3={this.props.web3} />
+                    ))}
                 </div>
             </div>
         );
