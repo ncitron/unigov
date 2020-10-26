@@ -52,7 +52,7 @@ class AutonomousProposal extends React.Component {
 
     render() {
         return (
-            <div className='AutonomousProposal row'>
+            <div className='AutonomousProposal'>
                 <div className="delegate-info">
                     <div class="col-12 delegate-description">
                         {this.getDescription()}
