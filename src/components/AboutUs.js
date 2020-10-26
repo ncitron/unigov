@@ -1,25 +1,20 @@
 import React from 'react';
-import { css } from "@emotion/core";
+
 class AboutUs extends React.Component {
 render() {
-    let loaderOrConnect;
-    const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-    `;
-    return (
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6" style={{ padding: '0px'}}>
-                <div class="aboutus content-container">
-                    <div class="aboutus-title">
+    return <div>
+                <div className="col-10 ap-list aboutus">
+                    <div className="aboutus-title">
                         About Us
                     </div>
-                    <div style={{ paddingLeft: '40px', paddingRight: '40px' }}>
+                    <div style={{ paddingLeft: '10px', paddingRight: '10px'}}>
                         <br />
                         <h2 style={{ textAlign: 'center' }}>
-                            🦄Codecks🦄 Integration — Waving our Magic Decentralization Wand for Penguins Everywhere:
+                            <img src="./penguin-party.png" title="Penguin Party" alt="Uniswap Governace | Penguin Party"/>
+                            <br />
+                            <div>🦄 Codecks 🦄</div>
+                            <br />
+                            <div style={{ fontSize: '16px'}}><em>Integration — Waving our Magic Decentralization Wand for Penguins Everywhere:</em></div>
                         </h2>
                         <p><img src="https://cdn-images-1.medium.com/max/2000/0*wnD9UBi83NqomtpN.gif" alt=""></img></p>
                         <p>Gather up, Penguins! You have been called to action! Now is the time to join us and have your voice heard in Defi governance! We think we have something important to say, when we say, you have a say, in what we say…anyway…</p>
@@ -36,10 +31,7 @@ render() {
                         </p>
                     </div>
                 </div>
-            </div>
-            <div class="col-3"></div>
-        </div>
-    )
+        </div>;
     }
 }
 export default AboutUs;

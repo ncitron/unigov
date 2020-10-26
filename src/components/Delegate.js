@@ -47,13 +47,13 @@ class Delegate extends React.Component {
     render() {
         return (
             <div className='Delegate row'>
-                <div class="col-9">
+                <div className="col-9 delegate-key">
                     {this.props.delegate.name !== null ? this.props.delegate.name : this.props.delegate.delegate}
                     <br />
                     votes: {this.state.votes} UNI
                 </div>
-                <div class="col-3 delegate-button-container">
-                    <button type="button" class="btn btn-primary" onClick={this.delegateTo}>Delegate</button>
+                <div className="col-3 delegate-button-container">
+                    <button type="button" className="btn btn-primary" onClick={this.delegateTo}>Delegate</button>
                 </div>
             </div>
         );
