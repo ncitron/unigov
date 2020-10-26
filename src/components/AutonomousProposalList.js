@@ -15,7 +15,7 @@ class AutonomousProposalList extends React.Component {
         let noProps;
         if(loaderOrConnect == null && this.props.autoProps.length === 0) {
             noProps = 
-            <div style={{ textAlign: 'center', marginTop: '25%', fontSize: '30px', color: 'grey'}}>
+            <div style={{ textAlign: 'center', marginTop: '20%', fontSize: '30px', color: 'grey'}}>
                 None Found.
             </div>
         }
