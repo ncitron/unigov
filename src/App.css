@@ -68,6 +68,10 @@
     word-wrap: break-word;
 }
 
+.Delegate > .delegate-key, AutonomousProposal > .delegate-description{
+    padding-left: 0%;
+}
+
 .Delegate:hover {
     border-left: 3px solid #db2cc4;
 }
@@ -149,7 +153,7 @@
 }
 
 .delegate-title, .aboutus-title {
-    padding: 35px;
+    padding: 16px;
     font-size: 30px;
     border-bottom: 1px solid #d4d4d4;;
 }
@@ -167,8 +171,8 @@ body {
 }
 
 .progress {
-    margin-left: 15px;
-    width: 400px;
+    width: 100%;
+    max-width: 100%;
 }
 
 .progress-bar {
@@ -202,6 +206,15 @@ p {
     display: none;
 }
 
+.delegate-button-container {
+    margin-top: 16px;
+    padding: 0%;
+}
+
+.delegate-description {
+    padding: 0%;
+}
+
 @media (max-width: 576px) { 
     .app-menu {
         display: none;
@@ -215,5 +228,11 @@ p {
     }
     .name-page, .dropdown-menu-btn {
         font-size: 16px;
+    }
+    .Delegate > .delegate-key, .delegate-button-container, .delegate-button-container > button {
+        padding-left: 0 ;
+        flex: 0 100%;
+        width: 100%;
+        max-width: 100%;
     }
  }

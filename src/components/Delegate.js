@@ -47,7 +47,7 @@ class Delegate extends React.Component {
     render() {
         return (
             <div className='Delegate row'>
-                <div className="col-9" style={{ paddingLeft: '0%' }}>
+                <div className="col-9 delegate-key">
                     {this.props.delegate.name !== null ? this.props.delegate.name : this.props.delegate.delegate}
                     <br />
                     votes: {this.state.votes} UNI

@@ -6,7 +6,8 @@ class AutonomousProposal extends React.Component {
     state = {
         votes: 0,
         rawVotes: 0,
-        account: ''
+        account: '',
+        progressWidth: 0
     }
 
     getDescription = () => {
@@ -18,7 +19,7 @@ class AutonomousProposal extends React.Component {
         }
         return ''
     }
-
+  
     getVotes = async () => {
         const uniAddress = process.env.REACT_APP_UNI_ADDRESS;
         let uni = new this.props.web3.eth.Contract(uniABI, uniAddress);
@@ -40,30 +41,34 @@ class AutonomousProposal extends React.Component {
     }
 
     componentDidMount = async () => {
+        
+        // progress size
+        const { clientWidth } = document.getElementById('progressBar');
+        this.setState({ progressWidth: clientWidth });
+
         this.setState({ account: (await this.props.web3.eth.requestAccounts())[0]})
         await this.getVotes();
     }
 
     render() {
         return (
-            <div className='AutonomousProposal'>
-                <div class="row">
-                    <div class="col-9">
+            <div className='AutonomousProposal row'>
+                <div className="delegate-info">
+                    <div class="col-12 delegate-description">
                         {this.getDescription()}
                         <br />
                         <div style={{marginTop: '20px'}}>
                             {this.state.votes} / 10M UNI
                         </div>
                     </div>
-                    <div class="col-3 delegate-button-container">
+                    <div class="progress" id="progressBar">
+                        <div class="progress-bar" role="progressbar" style={{width: `${(this.state.progressWidth) * this.state.rawVotes / 10_000_000}px`}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" />
+                    </div>
+                    <div class="col-12 delegate-button-container">
                         <button type="button" class="btn btn-primary" onClick={this.delegateTo}>Delegate</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style={{width: `${400 * this.state.rawVotes / 10_000_000}px`}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" />
-                    </div>
-                </div>
+                
             </div>
         );
     }
