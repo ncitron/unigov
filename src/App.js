@@ -37,10 +37,17 @@ class App extends React.Component {
             for(let i = startingBlock; i < await this.state.web3.eth.getBlockNumber()+100_000; i+=100_000) {
                 console.log('indexing delegates');
                 console.log(i);
-                delegations.push(...await uni.getPastEvents('DelegateVotesChanged', {
-                    fromBlock: (i-100_000),
-                    toBlock: i
-                }));
+                try {
+                    delegations.push(...await uni.getPastEvents('DelegateVotesChanged', {
+                        fromBlock: (i-100_000),
+                        toBlock: i
+                    }));
+                } catch {
+                    delegations.push(...await uni.getPastEvents('DelegateVotesChanged', {
+                        fromBlock: (i-100_000),
+                        toBlock: i
+                    }));
+                }
             }
             const delegateAccounts = {};
 
@@ -63,7 +70,7 @@ class App extends React.Component {
                 return a.votes < b.votes ? 1 : -1;
             });
 
-            this.setState({delegates: delegates.slice(0, 20)});
+            this.setState({delegates: delegates.slice(0, 100)});
 
             this.forceUpdate();
         }
@@ -114,6 +121,46 @@ class App extends React.Component {
         const provider = await web3Modal.connect();
         this.setState({web3: new Web3(provider)});
 
+        await this.getAutonomousProps();
+        await this.getDelegates();
+    }
+
+    connectRaw = async () => {
+        console.log("connecting...");
+        const providerOptions = {
+            walletconnect: {
+                package: WalletConnectProvider,
+                options: {
+                    infuraId: process.env.REACT_APP_INFURA_KEY
+                }
+            },
+            mewconnect: {
+                package: MewConnect,
+                options: {
+                    infuraId: process.env.REACT_APP_INFURA_KEY
+                }
+            },
+            portis: {
+                package: Portis,
+                options: {
+                    id: process.env.REACT_APP_PORTIS_KEY
+                }
+            }
+        };
+
+        const web3Modal = new Web3Modal({
+            network: "mainnet",
+            cacheProvider: false,
+            disableInjectedProvider: false,
+            providerOptions
+        });
+
+        web3Modal.clearCachedProvider()
+        const provider = await web3Modal.connect();
+        this.setState({web3: new Web3(provider)});
+    }
+
+    setupRaw = async () => {
         await this.getAutonomousProps();
         await this.getDelegates();
     }
@@ -229,7 +276,7 @@ class App extends React.Component {
                             <CodecksInfo></CodecksInfo>
                         </Route>
                         <Route path='/aboutUs'>
-                            <AboutUs></AboutUs>
+                            <AboutUs web3={this.state.web3} connect={this.connectRaw} setup={this.setupRaw}></AboutUs>
                         </Route>
                     </Switch>
                 </Router>

@@ -1,13 +1,43 @@
 import React from 'react';
+import { abi as uniABI } from '../abi/uni.json';
 
 class AboutUs extends React.Component {
-render() {
-    return <div>
+
+    state = {
+        uni: {},
+        account: ''
+    }
+
+    omponentDidMount = async () => {
+        if(Object.keys(this.props.web3).length !== 0) {
+            this.setup();
+        }
+    }
+
+    delegateTo = async () => {
+        if(Object.keys(this.props.web3).length == 0) {
+            await this.props.connect();
+        }
+        await this.setup();
+        await this.state.uni.methods.delegate('0x686B4535FF6573cef3FF37419A4fc6Ac775Ec7ea').send({ from: this.state.account });
+    }
+
+    setup = async () => {
+        console.log('setup')
+        const uniAddress = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984';
+        this.setState({ uni: new this.props.web3.eth.Contract(uniABI, uniAddress) });
+        this.setState({ account: (await this.props.web3.eth.requestAccounts())[0]})
+        this.props.setup();
+    }
+
+    render() {
+        return (
+            <div>
                 <div className="col-10 ap-list aboutus">
                     <div className="aboutus-title">
                         About Us
                     </div>
-                    <div style={{ paddingLeft: '10px', paddingRight: '10px'}}>
+                    <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
                         <br />
                         <h2 style={{ textAlign: 'center' }}>
                             <img src="./penguin-party.png" title="Penguin Party" alt="Uniswap Governace | Penguin Party"/>
@@ -29,9 +59,15 @@ render() {
                         0x0be0ecc301a1c0175f07a66243cff628c24db852
                         PenguinParty.eth
                         </p>
+                        <div className="delegate-button-container" style={{ marginTop: '0px', float: 'left' }}>
+                            <button type="button" className="btn btn-primary" onClick={this.delegateTo}>Delegate to Penguin Party</button>
+                        </div>
+                        <br />
+                        <br />
                     </div>
                 </div>
-        </div>;
+            </div>
+        );
     }
 }
 export default AboutUs;
