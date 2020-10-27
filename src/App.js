@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
 import './App.css';
 import Web3 from 'web3'
 import Web3Modal from "web3modal";
