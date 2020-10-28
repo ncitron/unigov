@@ -7,6 +7,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import MewConnect from "@myetherwallet/mewconnect-web-client";
 import Portis from "@portis/web3";
 import { abi as uniABI } from './abi/uni.json';
+import cachedDelegateList from './cache.json';
 import apFactoryABI from './abi/apFactory.json';
 import DelegateList from './components/DelegateList';
 import AutonomousProposalList from './components/AutonomousProposalList';
@@ -26,25 +27,37 @@ class App extends React.Component {
     }
 
     getDelegates = async () => {
-        console.log(1);
         if(Object.keys(this.state.web3).length !== 0) {
             const uniAddress = process.env.REACT_APP_UNI_ADDRESS;
             let uni = new this.state.web3.eth.Contract(uniABI, uniAddress);
 
+            //quickly get balances of cached delegate list before computing more accurate leaderboard
+            let delegates = [];
+            for(let i = 0; i < Math.min(30, cachedDelegateList.length); i++) {
+                delegates.push({
+                    delegate: cachedDelegateList[i],
+                    votes: await uni.methods.getCurrentVotes(cachedDelegateList[i]).call() / 1e18
+                });
+            }
+            delegates = delegates.sort((a, b) => {
+                return a.votes < b.votes ? 1 : -1;
+            });
+            this.setState({delegates: delegates});
+
             let delegations = [];
             let startingBlock = 10_750_000;
-            if(process.env.REACT_APP_NETWORK === 'goerli') startingBlock = 100_000;
-            for(let i = startingBlock; i < await this.state.web3.eth.getBlockNumber()+100_000; i+=100_000) {
+            if(process.env.REACT_APP_NETWORK === 'goerli') startingBlock = 10_000;
+            for(let i = startingBlock; i < await this.state.web3.eth.getBlockNumber()+10_000; i+=10_000) {
                 console.log('indexing delegates');
                 console.log(i);
                 try {
                     delegations.push(...await uni.getPastEvents('DelegateVotesChanged', {
-                        fromBlock: (i-100_000),
+                        fromBlock: (i-10_000),
                         toBlock: i
                     }));
                 } catch {
                     delegations.push(...await uni.getPastEvents('DelegateVotesChanged', {
-                        fromBlock: (i-100_000),
+                        fromBlock: (i-10_000),
                         toBlock: i
                     }));
                 }
@@ -56,7 +69,7 @@ class App extends React.Component {
                 delegateAccounts[delegate] = newBalance;
             });
 
-            let delegates = [];
+            delegates = [];
             Object.keys(delegateAccounts).forEach((account) => {
                 const voteWeight = +delegateAccounts[account];
                 if (voteWeight === 0) return;
