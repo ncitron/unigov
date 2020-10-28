@@ -1,7 +1,6 @@
 .spinner {
     justify-content: center;
-    margin-top: 15vh;
-    margin-bottom: 15vh;
+    margin-top: 50px;
 }
 
 .spinner-border {
@@ -11,8 +10,6 @@
 }
 
 .aboutus-nav{
-  margin-right:20px;
-  margin-left: 20px;
   color: white;
 }
 
@@ -31,15 +28,25 @@
     margin-right: auto;
 }
 
-.codecks-nav {
-  margin-right:20px;
-  margin-left: 20px;
+.nav-item {
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-bottom: 2.5px;
+    display: inline-block;
+}
+
+.ap-nav, .codecks-nav {
   color: white;
 }
 
 .codecks-nav:hover {
     color: #db2cc4;
     border-bottom: 2px solid #db2cc4;
+}
+
+.no-hover:hover {
+    color: inherit !important;
+    border: none !important;
 }
 
 .AutonomousProposal {
@@ -61,20 +68,32 @@
     word-wrap: break-word;
 }
 
+.Delegate > .delegate-key, AutonomousProposal > .delegate-description{
+    padding-left: 0%;
+}
+
 .Delegate:hover {
     border-left: 3px solid #db2cc4;
 }
 
-.header {
+.header, .header-navbar {
     color: white;
     background-color: black;
-    padding-top: 20px;
+    padding: 16px;
     margin: 0px;
 }
 
+.header-navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
 .name-page {
-    padding-left: 30px;
+    padding-left: 10px;
     font-size: 20px;
+    margin-bottom: 0;
 }
 
 .nav {
@@ -84,8 +103,6 @@
 }
 
 .delegate-nav {
-    margin-left: 20px;
-    margin-right: 20px;
     color: white;
 }
 
@@ -96,7 +113,6 @@
 
 .ap-nav {
     color: white;
-    margin-right: 20px;
 }
 
 .ap-nav:hover {
@@ -104,12 +120,14 @@
     border-bottom: 2px solid #db2cc4;
 }
 
-.hero {
-    height: 30vh;
+.hero , .header{
     background-color: black;
 }
+.hero {
+    height: 30vh;
+}
 
-.delegate-list, .content-container {
+.ap-list, .delegate-list, .content-container {
     margin-top: -7vh;
     background-color: white;
     border-radius: 5px;
@@ -119,37 +137,23 @@
     padding: 0px;
 }
 
-.ap-list {
-    margin-top: -7vh;
-    background-color: white;
-    border-radius: 5px;
-    height: 70vh;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px;
-}
-
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #db2cc4 !important;
     border-color: #db2cc4 !important;
-    float: right;
 }
 
 .btn-lg {
-    font-size: 2rem;
-    width: 40%;
-    margin-right: 30%;
-    border-radius: 50px;
-    height: 20%;
-    margin-bottom: 40%;
+    font-size: 1.2rem;
+    width: 90%;
 }
 
 .delegate-button-container {
+    text-align: right;
     padding-right: 0px;
 }
 
 .delegate-title, .aboutus-title {
-    padding: 35px;
+    padding: 16px;
     font-size: 30px;
     border-bottom: 1px solid #d4d4d4;;
 }
@@ -167,10 +171,68 @@ body {
 }
 
 .progress {
-    margin-left: 15px;
-    width: 400px;
+    width: 100%;
+    max-width: 100%;
 }
 
 .progress-bar {
     background-color: #db2cc4;
 }
+
+button.navbar-toggler{
+    outline: none;
+}
+
+p {
+    overflow-wrap: break-word;
+}
+
+.app-navbar-nav {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.app-menu {
+    width: 60%;
+}
+
+.navbar-brand {
+    width: 20%;
+    text-align: right;
+    margin-right: 0%;
+}
+
+.dropdown-menu-btn{
+    display: none;
+}
+
+.delegate-button-container {
+    margin-top: 16px;
+    padding: 0%;
+}
+
+.delegate-description {
+    padding: 0%;
+}
+
+@media (max-width: 576px) { 
+    .app-menu {
+        display: none;
+    }
+    p > img {
+        width: 100%;
+        height: auto;
+    }
+    .dropdown-menu-btn {
+        display: block;
+    }
+    .name-page, .dropdown-menu-btn {
+        font-size: 16px;
+    }
+    .Delegate > .delegate-key, .delegate-button-container, .delegate-button-container > button {
+        padding-left: 0 ;
+        flex: 0 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+ }

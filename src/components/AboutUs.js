@@ -1,25 +1,50 @@
 import React from 'react';
-import { css } from "@emotion/core";
+import { abi as uniABI } from '../abi/uni.json';
+
 class AboutUs extends React.Component {
-render() {
-    let loaderOrConnect;
-    const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-    `;
-    return (
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6" style={{ padding: '0px'}}>
-                <div class="aboutus content-container">
-                    <div class="aboutus-title">
+
+    state = {
+        uni: {},
+        account: ''
+    }
+
+    omponentDidMount = async () => {
+        if(Object.keys(this.props.web3).length !== 0) {
+            this.setup();
+        }
+    }
+
+    delegateTo = async () => {
+        if(Object.keys(this.props.web3).length == 0) {
+            await this.props.connect();
+        }
+        await this.setup();
+        await this.state.uni.methods.delegate('0x686B4535FF6573cef3FF37419A4fc6Ac775Ec7ea').send({ from: this.state.account });
+    }
+
+    setup = async () => {
+        console.log('setup')
+        const uniAddress = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984';
+        this.setState({ uni: new this.props.web3.eth.Contract(uniABI, uniAddress) });
+        this.setState({ account: (await this.props.web3.eth.requestAccounts())[0]})
+        this.props.setup();
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="col-10 ap-list aboutus">
+                    <div className="aboutus-title">
                         About Us
                     </div>
-                    <div style={{ paddingLeft: '40px', paddingRight: '40px' }}>
+                    <div style={{ paddingLeft: '10px', paddingRight: '10px' }}>
                         <br />
                         <h2 style={{ textAlign: 'center' }}>
-                            🦄Codecks🦄 Integration — Waving our Magic Decentralization Wand for Penguins Everywhere:
+                            <img src="./penguin-party.png" title="Penguin Party" alt="Uniswap Governace | Penguin Party"/>
+                            <br />
+                            <div>🦄 Codecks 🦄</div>
+                            <br />
+                            <div style={{ fontSize: '16px'}}><em>Integration — Waving our Magic Decentralization Wand for Penguins Everywhere:</em></div>
                         </h2>
                         <p><img src="https://cdn-images-1.medium.com/max/2000/0*wnD9UBi83NqomtpN.gif" alt=""></img></p>
                         <p>Gather up, Penguins! You have been called to action! Now is the time to join us and have your voice heard in Defi governance! We think we have something important to say, when we say, you have a say, in what we say…anyway…</p>
@@ -34,12 +59,15 @@ render() {
                         0x0be0ecc301a1c0175f07a66243cff628c24db852
                         PenguinParty.eth
                         </p>
+                        <div className="delegate-button-container" style={{ marginTop: '0px', float: 'left' }}>
+                            <button type="button" className="btn btn-primary" onClick={this.delegateTo}>Delegate to Penguin Party</button>
+                        </div>
+                        <br />
+                        <br />
                     </div>
                 </div>
             </div>
-            <div class="col-3"></div>
-        </div>
-    )
+        );
     }
 }
 export default AboutUs;
